@@ -1,0 +1,32 @@
+Configure SFTP Server
+-----------------------------------------
+Download the OpenSSH Module: https://github.com/PowerShell/Win32-OpenSSH/releases
+--------------------------------------------------------------------------------------------
+Reference Link: https://www.ionos.com/digitalguide/server/configuration/set-up-a-windows-sftp-server/
+--------------------------------------------------------------------------------------------------------
+
+
+Steps to configure OpenSSH Server
+-----------------------------------
+Step 1: Download OpenSSH from above mention URL extract the folder files in following path cd "C: \Program Files\OpenSSH"
+---------------------------------------------------------------------------------------------------------
+Step 2: Open the PowerShell navigate the following Path: cd "C: \Program Files\OpenSSH"
+---------------------------------------------------------------------------------------------------------
+Step 3: Activate SSHD and the SSH agent
+powershell.exe -ExecutionPolicy Bypass -File install-sshd.ps1
+------------------------------------------------------------------------------------------------------
+Step 4: Allow SSH Port 22 under the Firewall and NSG.
+------------------------------------------------------------------------------------------------------
+Step 5: Navigate to the C:\ProgramData\ssh\sshd_config for making changes in config file
+
+Allow Port 22
+ChrootDirectory "C:\API_Users_Data" ---> For changing Root Directory.
+PubkeyAuthentication yes
+PasswordAuthentication yes
+
+----------------------------------------------------------------------
+Optional: 
+Disable Root Login: PermitRootLogin no
+AllowUsers user1 user2
+
+-------------------------------------------------------------------------------------
