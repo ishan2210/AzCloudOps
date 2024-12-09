@@ -1,0 +1,29 @@
+Deploy Volumes with Azure Container Instances 
+---------------------------------------------------------------------------------------------------------------------------------
+SUBSCRIPTION_ID="5ab765e5-b9c8-44e9-8fb4-25ab27a035a8"
+export SUBSCRIPTION_ID="5ab765e5-b9c8-44e9-8fb4-25ab27a035a8"
+az account set --subscription $SUBSCRIPTION_ID
+
+az container show --resource-group Docker-RG --name feedbackapp --query "{FQDN:ipAddress.fqdn, IP:ipAddress.ip}" --output table
+
+az container create \
+  --resource-group Docker-RG \
+  --name feedbackapp \
+  --image nodejsappbyishan.azurecr.io/feedback-app:nv1 \
+  --registry-username  \
+  --registry-password  \
+  --azure-file-volume-account-name contvolumedata \
+  --azure-file-volume-account-key  \
+  --azure-file-volume-share-name contdata-fs \
+  --azure-file-volume-mount-path /app/feedback \  #define path inside of the container
+  --cpu 1 --memory 1.5 \
+  --ip-address public \
+  --dns-name-label feedbackapp-label
+
+
+
+
+
+
+
+
