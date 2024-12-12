@@ -3,5 +3,5 @@ This Repository containing the necessary Configuration files and Deployment step
 -----------------------------------------------------------------------------------------------------------------
 Azure Security Assesment Report PowerShell: https://github.com/microsoft/ARI
 ---------------------------------------------------------------------------------
-tROUBLE SSH Error 1067: https://serverfault.com/questions/1166382/openssh-ssh-server-wont-start-on-windows-server-2019-after-windows-updates
+Troubleshoot SSH Error 1067: https://serverfault.com/questions/1166382/openssh-ssh-server-wont-start-on-windows-server-2019-after-windows-updates
 
