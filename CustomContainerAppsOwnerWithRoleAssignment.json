@@ -1,0 +1,21 @@
+{
+    "Name": "Custom Owner for Container Apps",
+    "Description": "Allows owner-level operations for Azure Container Apps without delete permissions and includes role assignment capabilities.",
+    "Actions": [
+        "Microsoft.App/containerApps/*",
+        "Microsoft.App/containerApps/read",
+        "Microsoft.App/containerApps/write",
+        "Microsoft.App/managedEnvironments/write",
+        "Microsoft.App/managedEnvironments/read",
+        "Microsoft.Authorization/roleAssignments/read",
+        "Microsoft.Authorization/roleAssignments/write",
+        "Microsoft.Authorization/roleAssignments/delete"
+    ],
+    "NotActions": [
+        "Microsoft.App/containerApps/delete"
+        
+    ],
+    "AssignableScopes": [
+        "/subscriptions/0e008d6d-3edb-47fa-90ce-8bf1f19091df"
+    ]
+}

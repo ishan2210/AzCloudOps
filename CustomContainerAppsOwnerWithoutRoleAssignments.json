@@ -1,0 +1,18 @@
+{
+    "Name": "Custom Container Apps Manager",
+    "Description": "Allows Users for Managing Container Apps",
+    "Actions": [
+        "Microsoft.App/containerApps/*",
+        "Microsoft.App/containerApps/read",
+        "Microsoft.App/containerApps/write",
+        "Microsoft.App/managedEnvironments/write",
+        "Microsoft.App/managedEnvironments/read"
+    ],
+    "NotActions": [
+        "Microsoft.App/containerApps/delete"
+        
+    ],
+    "AssignableScopes": [
+        "/subscriptions/0e008d6d-3edb-47fa-90ce-8bf1f19091df"
+    ]
+}
