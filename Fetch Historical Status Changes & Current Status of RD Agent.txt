@@ -1,0 +1,15 @@
+Fetch Historical Status Changes & Current Status of the RDAgent Service
+
+# Current Status of RDAgent
+$rdAgentStatus = Get-Service -Name RdAgent
+
+# History of RDAgent Status Changes
+$rdAgentHistory = Get-WinEvent -LogName "System" | Where-Object { $_.Id -in 7036 -and $_.Message -like "*RdAgent*" } | Select-Object TimeCreated, Id, Message
+
+# Display Results
+"Current RDAgent Status:"
+$rdAgentStatus | Format-Table -AutoSize
+
+"RDAgent History:"
+$rdAgentHistory | Format-Table -AutoSize
+
