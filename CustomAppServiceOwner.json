@@ -1,0 +1,16 @@
+{
+  "Name": "CustomAppServiceOwner",
+  "IsCustom": true,
+  "Description": "Grants Owner-level permissions for a specific App Service, including role assignment management.",
+  "Actions": [
+      "Microsoft.Web/sites/*",                                     
+      "Microsoft.Authorization/roleAssignments/*",               
+      "Microsoft.Resources/deployments/*"
+  ],
+  "NotActions": [
+    "Microsoft.Web/sites/delete"
+  ],
+  "AssignableScopes": [
+      "/subscriptions/0e008d6d-3edb-47fa-90ce-8bf1f19091df"         
+  ]
+}

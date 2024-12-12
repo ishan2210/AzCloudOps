@@ -1,0 +1,17 @@
+{
+    "Name": "Custom App Service Manager",
+    "IsCustom": true,
+    "Description": "Grants access to manage an App Service (start/stop, update) and manage WebJobs, without delete permissions, and no role assignment permissions.",
+    "Actions": [
+        "Microsoft.Web/sites/*",                                                      
+        "Microsoft.Resources/deployments/*"
+    ],
+    "NotActions": [
+        "Microsoft.Web/sites/delete",                  
+        "Microsoft.Authorization/roleAssignments/*"     
+    ],
+    "AssignableScopes": [
+        "/subscriptions/0e008d6d-3edb-47fa-90ce-8bf1f19091df"        
+    ]
+}
+
