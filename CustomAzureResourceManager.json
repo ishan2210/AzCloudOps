@@ -1,0 +1,44 @@
+{
+  "Name": "Custom Azure Resource Manager",
+  "IsCustom": true,
+  "Description": "Grants permissions for managing Azure Resources, excluding role assignment management.",
+  "Actions": [ 
+      "Microsoft.Web/sites/*",
+      "Microsoft.Resources/deployments/*",
+      "Microsoft.App/containerApps/*",
+      "Microsoft.App/containerApps/read",
+      "Microsoft.App/containerApps/write",
+      "Microsoft.App/managedEnvironments/*",
+      "Microsoft.App/managedEnvironments/write",
+      "Microsoft.App/managedEnvironments/dotNetComponents/read",
+      "Microsoft.App/managedEnvironments/read",
+      "Microsoft.ContainerRegistry/registries/*",                                              
+      "Microsoft.ContainerRegistry/registries/read",
+      "Microsoft.ContainerRegistry/registries/write",
+      "Microsoft.ContainerRegistry/registries/listCredentials/action",
+      "Microsoft.ContainerRegistry/registries/generateCredentials/action",
+      "Microsoft.ContainerRegistry/registries/webhooks/*",
+      "Microsoft.Storage/storageAccounts/*",
+      "Microsoft.KeyVault/vaults/*",
+      "Microsoft.CognitiveServices/accounts/*",
+      "Microsoft.MachineLearningServices/workspaces/*"
+  ],
+  
+  "NotActions": [
+    "Microsoft.Authorization/roleAssignments/*",
+    "Microsoft.Web/sites/delete",
+    "Microsoft.App/containerApps/delete",
+    "Microsoft.App/managedEnvironments/delete",
+    "Microsoft.ContainerRegistry/registries/delete",
+    "Microsoft.Storage/storageAccounts/delete",
+    "Microsoft.KeyVault/vaults/delete",
+    "Microsoft.CognitiveServices/accounts/delete",
+    "Microsoft.MachineLearningServices/workspaces/delete"
+  ],
+  "AssignableScopes": [
+      "/subscriptions/4f64d2bc-35c1-4596-98de-43ba8ece6474/",
+      "/subscriptions/4f64d2bc-35c1-4596-98de-43ba8ece6474/resourceGroups/QX-SOFT-UK/providers/Microsoft.App/managedEnvironments/QXSOFTUK-aca6",
+      "/subscriptions/4f64d2bc-35c1-4596-98de-43ba8ece6474/resourceGroups/QX-SOFT-UK"
+
+  ]
+}

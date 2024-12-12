@@ -1,0 +1,28 @@
+Commands to update Azure Custom Roles
+-----------------------------------------------
+
+$role = Get-AzRoleDefinition -Name "Custom Azure Resource Owner"
+
+$role.AssignableScopes.Add("/subscriptions/4f64d2bc-35c1-4596-98de-43ba8ece6474/resourceGroups/QX-SOFT-UK/providers/Microsoft.App/managedEnvironments/QXSOFTUK-aca6")
+
+Set-AzRoleDefinition -Role $role
+
+----------------------------------------------------------------------
+Command to list Azure custom roles json parameter
+
+az role definition list --name "Custom Azure Resource Manager" -o json
+------------------------------------------------------------------------------------------------
+
+command to ADD custom roles
+
+$SubscriptionId = "0e008d6d-3edb-47fa-90ce-8bf1f19091df"
+Set-AzContext -SubscriptionId $SubscriptionId
+
+az role definition create --role-definition CustomAppServiceOwner.json
+-------------------------------------------------------------------------------------------------
+setting subscription id
+
+$SubscriptionId = "0e008d6d-3edb-47fa-90ce-8bf1f19091df"
+Set-AzContext -SubscriptionId $SubscriptionId
+
+

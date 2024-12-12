@@ -1,0 +1,35 @@
+{
+  "Name": "Custom Azure Resource Owner",
+  "IsCustom": true,
+  "Description": "Grants Owner-level permissions for Azure Resources, including role assignment management.",
+  "Actions": [
+      "Microsoft.Authorization/roleAssignments/*", 
+      "Microsoft.Web/sites/*",
+      "Microsoft.Resources/deployments/*",
+      "Microsoft.App/containerApps/*",
+      "Microsoft.App/managedEnvironments/*",
+      "Microsoft.App/containerApps/read",
+      "Microsoft.App/containerApps/write",
+      "Microsoft.App/managedEnvironments/write",
+      "Microsoft.App/managedEnvironments/dotNetComponents/read",
+      "Microsoft.App/managedEnvironments/read",
+      "Microsoft.ContainerRegistry/registries/*",                                              
+      "Microsoft.ContainerRegistry/registries/read",
+      "Microsoft.ContainerRegistry/registries/write",
+      "Microsoft.ContainerRegistry/registries/listCredentials/action",
+      "Microsoft.ContainerRegistry/registries/generateCredentials/action",
+      "Microsoft.ContainerRegistry/registries/webhooks/*",
+      "Microsoft.Storage/storageAccounts/*",
+      "Microsoft.KeyVault/vaults/*",
+      "Microsoft.CognitiveServices/accounts/*",
+      "Microsoft.MachineLearningServices/workspaces/*"
+  ],
+  
+  "NotActions": [
+  ],
+  "AssignableScopes": [
+      "/subscriptions/4f64d2bc-35c1-4596-98de-43ba8ece6474/",
+      "/subscriptions/4f64d2bc-35c1-4596-98de-43ba8ece6474/resourceGroups/QX-SOFT-UK/providers/Microsoft.App/managedEnvironments/managedEnvironment-QXSOFTUK-aca6",
+      "/subscriptions/4f64d2bc-35c1-4596-98de-43ba8ece6474/resourceGroups/QX-SOFT-UK"
+  ]
+}
