@@ -23,10 +23,27 @@ Allow Port 22
 ChrootDirectory "C:\API_Users_Data" ---> For changing Root Directory.
 PubkeyAuthentication yes
 PasswordAuthentication yes
-
 ----------------------------------------------------------------------
 Optional: 
 Disable Root Login: PermitRootLogin no
 AllowUsers user1 user2
-
 -------------------------------------------------------------------------------------
+Allow and Deny Users
+
+#allowuser and denyuser
+Match User ishan
+    ForceCommand internal-sftp
+    ChrootDirectory C:\sftp
+    PermitTunnel no
+    AllowAgentForwarding no
+    AllowTcpForwarding no
+    X11Forwarding no
+    DenyUsers ishan
+
+Match User parth
+    ForceCommand internal-sftp
+    ChrootDirectory C:\parth
+    PermitTunnel no
+    AllowAgentForwarding no
+    AllowTcpForwarding no
+    X11Forwarding no
