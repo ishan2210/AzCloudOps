@@ -1,0 +1,90 @@
+How to Enable Internet and Internal Connectivity between Two Hyper-V Machines hosted under the Azure VM
+-------------------------------------------------------------------------------------------------------
+Create an Internal Virtual Switch
+To allow private communication between Hyper-V VMs, 
+create an Internal Virtual Switch (this allows communication only between the VMs and the host).
+
+New-VMSwitch -Name "InternalSwitch" -SwitchType Internal
+---------------------------------------------------------------------------------------------------------
+Assign Virtual Network Adapters to VMs
+
+Connect-VMNetworkAdapter -VMName "VM1" -SwitchName "InternalSwitch"
+Connect-VMNetworkAdapter -VMName "VM2" -SwitchName "InternalSwitch"
+---------------------------------------------------------------------------------------------------------
+Assign Private IP Addresses
+Now, assign static private IPs to both VMs.
+
+Log in to VM1, open Network & Internet Settings.
+Go to Change adapter options.
+Right-click the InternalSwitch adapter → Select Properties.
+Double-click Internet Protocol Version 4 (TCP/IPv4).
+Set a static IP, e.g.:
+IP Address: 192.168.1.10
+Subnet Mask: 255.255.255.0
+Click OK.
+Repeat the same steps for VM2, using:
+
+IP Address: 192.168.1.11
+Subnet Mask: 255.255.255.0
+----------------------------------------------------------------------------------------------------------
+Verify Communication
+To confirm that both VMs can communicate:
+
+Open Command Prompt on VM1 and run
+ping 192.168.1.11
+
+On VM2, run
+ping 192.168.1.10
+-----------------------------------------------------------------------------------
+Troubleshooting (If Ping Fails)
+If the ping does not work:
+
+Disable Windows Firewall temporarily on both VMs
+----------------------------------------------------------------------------------------
+Step-by-Step Procedure to Enable Internet on Hyper-V VMs
+
+Create a NAT Network
+You need to create a NAT-enabled network that allows the VMs to access the internet through the host.
+
+Check Existing Network Adapters
+First, list all network adapters on your Windows Server 2019 to identify the interface connected to the internet.
+
+Get-NetAdapter
+
+Look for the adapter that is connected to the internet (likely your Ethernet or Wi-Fi interface).
+------------------------------------------------------------------------------------------------
+Create a NAT Virtual Network
+Now, create a NAT gateway for your internal network.
+
+New-NetIPAddress -IPAddress 192.168.1.1 -PrefixLength 24 -InterfaceAlias "vEthernet (InternalSwitch)"
+
+New-NetNat -Name "InternalNAT" -InternalIPInterfaceAddressPrefix 192.168.1.0/24
+
+192.168.1.1 is the default gateway for your VMs.
+192.168.1.0/24 is the subnet.
+
+--------------------------------------------------------------------------------------------------------
+Configure VM Network Adapters
+Each VM should use the NAT Gateway (192.168.1.1) as its default gateway.
+
+On VM1 and VM2, update network settings:
+
+Go to Network & Internet Settings → Change adapter options.
+Right-click the InternalSwitch adapter → Properties.
+Select Internet Protocol Version 4 (TCP/IPv4) → Properties.
+Set:
+IP Address: (Already assigned, e.g., 192.168.1.10 for VM1, 192.168.1.11 for VM2)
+Subnet Mask: 255.255.255.0
+Default Gateway: 192.168.1.1
+Preferred DNS Server: 8.8.8.8
+Alternate DNS Server: 8.8.4.4
+Click OK and restart the network adapter.
+
+--------------------------------------------------------------------------------------------------------------
+Enable IP Forwarding on the Host
+Ensure IP forwarding is enabled on the Windows Server 2019 host.
+
+Set-NetIPInterface -InterfaceAlias "vEthernet (InternalSwitch)" -Forwarding Enabled
+
+
+
