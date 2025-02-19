@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In and About Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.5s ease;
+        }
+        .page {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        .page.active {
+            display: block;
+        }
+        #signInPage {
+            margin-top: 100px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], button {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #aboutPage {
+            margin-top: 50px;
+        }
+        #colorButtons {
+            margin-top: 20px;
+        }
+        #colorButtons button {
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sign In Page -->
+    <div id="signInPage" class="page active">
+        <h2>Sign In Page</h2>
+        <form id="signInForm">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <br>
+            <input type="email" id="email" placeholder="Email" required>
+            <br>
+            <input type="password" id="password" placeholder="Password" required>
+            <br>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+
+    <!-- About Company Page -->
+    <div id="aboutPage" class="page">
+        <h2>About Our Company</h2>
+        <p>Welcome to our company! We are a team of passionate individuals dedicated to providing the best services to our clients.</p>
+        <p>Our mission is to innovate and deliver solutions that make a difference.</p>
+        <div id="colorButtons">
+            <h3>Choose Your Background Color:</h3>
+            <button onclick="changeBackgroundColor('#FFCCCB')">Pink</button>
+            <button onclick="changeBackgroundColor('#ADD8E6')">Blue</button>
+            <button onclick="changeBackgroundColor('#90EE90')">Green</button>
+            <button onclick="changeBackgroundColor('#FFFFFF')">White</button>
+        </div>
+    </div>
+
+    <script>
+        // Handle sign-in form submission
+        document.getElementById('signInForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation
+            if (fullName && email && password) {
+                // Hide sign-in page and show about page
+                document.getElementById('signInPage').classList.remove('active');
+                document.getElementById('aboutPage').classList.add('active');
+            } else {
+                alert("Please fill out all fields.");
+            }
+        });
+
+        // Function to change background color
+        function changeBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+    </script>
+
+</body>
+</html>
