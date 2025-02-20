@@ -1,0 +1,55 @@
+Identify the Web Server
+
+Websites on Linux are usually hosted on web servers like Apache, Nginx, or other services. 
+Run the following command to check which web server is installed:
+
+sudo ss -tlnp | grep -E '80|443'
+
+If you see nginx, the site is hosted on Nginx.
+If you see httpd, the site is hosted on Apache.
+---------------------------------------------------------------------
+If no web server is detected, run
+sudo systemctl list-units --type=service | grep -E 'nginx|httpd'
+----------------------------------------------------------------------
+Web files are usually stored in one of these common locations:
+/var/www/html/  
+/home/username/  
+/opt/  
+--------------------------------------------------------------------------
+You can list website-related directories using:
+sudo find / -type d -name "html" 2>/dev/null
+
+-----------------------------------------------------------------------
+Identify the Website's Programming Language
+Check the type of files present in the directory:
+ls -l /var/www/html/
+
+PHP Website → If files end with .php
+Node.js Website → Look for package.json
+Python Website → Look for .py files or requirements.txt
+Java Website → Look for .war or .jar files
+
+-----------------------------------------------------------------------
+Alternatively, check the running processes:
+ps aux | grep -E 'php|node|python|java'
+-------------------------------------------------------------------------
+ Locate the SSL Certificate
+To find SSL certificates, check common directories:
+
+sudo find /etc/ -type f -name "*.crt"
+
+SSL certificates are commonly stored in:
+
+Let’s Encrypt → /etc/letsencrypt/live/yourdomain/
+Apache SSL Path → /etc/httpd/conf.d/ssl.conf
+Nginx SSL Path → /etc/nginx/nginx.conf
+--------------------------------------------------------------------------
+Find the SSL Configuration in the Web Server
+
+For Apache:
+sudo grep -i 'SSLCertificateFile' /etc/httpd/conf.d/*.conf
+---------------------------------------------------------------------
+For Nginx:
+sudo grep -i 'ssl_certificate' /etc/nginx/nginx.conf
+
+
