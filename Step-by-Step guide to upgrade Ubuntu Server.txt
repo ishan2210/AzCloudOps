@@ -1,0 +1,70 @@
+Step-by-Step guide to upgrade your Azure VM running Ubuntu Server 22.04 LTS to Ubuntu Server 24.04 LTS
+------------------------------------------------------------------------------------------------------
+Install Latest Updates for 20.04
+
+sudo apt update && sudo apt upgrade -y
+sudo apt dist-upgrade -y
+
+--------------------------------------
+Reboot if required:
+sudo reboot
+
+------------------------------------------
+Step 3: Install update-manager-core
+
+sudo apt install update-manager-core -y
+sudo nano /etc/update-manager/release-upgrades
+---------------------------------------------
+Make sure the line says:
+Prompt=lts
+
+---------------------------------------------
+Step 4: Start the Upgrade to 24.04
+Ubuntu 24.04 is a new LTS release. To upgrade:
+
+sudo do-release-upgrade -d
+-------------------------------------------------
+Step 5: Follow the On-Screen Prompts
+
+You'll be asked several questions (e.g., replace config files, remove obsolete packages).
+
+Type Y to proceed when needed.
+
+This process may take 30–60 minutes depending on VM specs and internet speed.
+----------------------------------------------------------------------------------
+Step 6: Reboot After Upgrade
+sudo reboot
+
+--------------------------------------------------------------------------------
+Verify the Upgrade
+
+lsb_release -a
+-----------------------------------------------------------------------
+Step 8 (Optional): Clean Up
+
+sudo apt autoremove -y
+sudo apt autoclean
+-----------------------------------------------------------------------------
+ Step 9: Validate Services
+Check that all services (e.g., web server, database, applications) are running as expected.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
