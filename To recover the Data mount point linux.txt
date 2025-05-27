@@ -1,0 +1,56 @@
+To recover the /Data mount point and access your database without data loss, follow these steps:
+-----------------------------------------------------------------------------------------------------------------
+1. Check if /dev/sda1 is Still Present
+
+lsblk
+Ensure /dev/sda1 is present in the output and not showing as unallocated space.
+-----------------------------------------------------------------------------------------------------------------
+2. Check if /dev/sda1 Is Mounted
+Check if /dev/sda1 is currently mounted:
+df -h | grep /dev/sda1 or mount | grep /dev/sda1
+If /dev/sda1 is not listed, it means it is unmounted.
+-----------------------------------------------------------------------------------------------------------------
+3. Verify Data on /dev/sda1
+To ensure the data on /dev/sda1 is still intact, check the contents by mounting the partition temporarily:
+
+Create a temporary mount point:
+sudo mkdir -p /mnt/temp
+
+Mount /dev/sda1:
+sudo mount /dev/sda1 /mnt/temp
+
+Check the data:
+ls -l /mnt/temp
+
+If you can see your data (including your database files), it means the data is intact, 
+and you can proceed with remounting it at /Data.
+
+Unmount /dev/sda1 (after checking):
+sudo umount /mnt/temp
+-----------------------------------------------------------------------------------------------------------------
+4. Remount /dev/sda1 on /Data
+
+sudo mkdir -p /data
+
+sudo mount /dev/sda1 /data
+
+df -h | grep /data
+-----------------------------------------------------------------------------------------------------------------
+5. Make the Mount Persistent
+To ensure that /dev/sda1 is automatically mounted at /Data on system reboots, you can add an entry to /etc/fstab.
+
+Edit /etc/fstab:
+sudo nano /etc/fstab
+
+Add the following line for /dev/sda1:
+/dev/sda1  /Data  ext4  defaults  0  2
+(Replace ext4 with the actual filesystem type if it’s different.)
+
+Test the fstab entry:
+sudo mount -a
+
+
+
+
+
+
