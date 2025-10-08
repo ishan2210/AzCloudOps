@@ -1,0 +1,41 @@
+$SourceAcr = "sourceacrimage"
+$TargetAcr = "targetacrimage"
+$SourceSubscription = "sourcesubscriptionid"
+$TargetSubscription = "targetsubscriptionid"
+ 
+#Source ACR Admin credentials
+$SourceAcrUsername = "adminusername"                  
+$SourceAcrPassword = "adminpassword"
+ 
+
+#Ensure Admin user is enabled on source ACR
+az acr update -n $SourceAcr --admin-enabled true
+ 
+
+#Set source subscription and list repositories
+az account set --subscription $SourceSubscription
+$repos = az acr repository list --name $SourceAcr --output tsv
+ 
+
+# Loop through each repository
+foreach ($repo in $repos) {
+    Write-Host "Processing repository: ${repo}"
+    # List all tags for this repository
+    $tags = az acr repository show-tags --name $SourceAcr --repository $repo --output tsv
+ 
+    foreach ($tag in $tags) {
+        Write-Host "  Importing: ${repo}:${tag}"
+ 
+        # Import image to target ACR
+        az acr import `
+            --name $TargetAcr `
+            --subscription $TargetSubscription `
+            --source "$($SourceAcr).azurecr.io/${repo}:${tag}" `
+            --image "${repo}:${tag}" `
+            --username $SourceAcrUsername `
+            --password $SourceAcrPassword `
+            --force
+    }
+}
+ 
+Write-Host "All images copied successfully!"
