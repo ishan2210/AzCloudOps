@@ -1,5 +1,5 @@
-$Username = "BRA-IT-Admin"
-$Password = "5LOKVeRRcI4be"
+$Username = "adminuser"
+$Password = "enterpasswordhere"
  
 $group = "Administrators"
  
@@ -21,3 +21,4 @@ else {
  
 Write-Host "Ensuring password for $Username never expires."
 & WMIC USERACCOUNT WHERE "Name='$Username'" SET PasswordExpires=FALSE
+
