@@ -1,0 +1,6 @@
+Set-ExecutionPolicy -Scope Process Bypass -Force
+ 
+.\Invoke-StorageIncrementalSync.ps1 `
+  -CsvPath "C:\Users\admini\Downloads\storage-sync-map.csv" `
+  -AzCopyPath "C:\Users\admini\Downloads\azcopy_windows_amd64_10.30.1\azcopy_windows_amd64_10.30.1\azcopy.exe" `
+  -LogRoot "C:\temp\AzCopy-Logs"
